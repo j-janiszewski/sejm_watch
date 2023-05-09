@@ -47,11 +47,13 @@ top_pms %>%
    scale_color_manual(values = cols) +
   scale_fill_manual(values = cols)
 
-ggsave("plot.png", device = "png", width = 12, height = 12)
+temp_file <- tempfile()
+
+ggsave(temp_file, device = "png", width = 12, height = 12)
 
 status0 <- glue::glue("Najczęściej odpowiadający posłowie od {dates[1]} do {dates[2]} \
                       @{paste(top_pms$screen_name, collapse = ' @')}")
 
 print(status0)
 
-post_tweet(status = status0, media = "plot.png", token = token)
+post_tweet(status = status0, media = temp_file,media_alt_text= "Wykres najczęściej odpowiadających na twitterze posłów. ", token = token)
