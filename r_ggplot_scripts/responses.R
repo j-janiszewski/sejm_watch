@@ -12,9 +12,9 @@ library(rtweet)
 #   access_secret = Sys.getenv("TWITER_ACCESS_SECRET")
 # )
 
-dates=readLines(".\dates.txt")
+dates=readLines("dates.txt")
 
-top_pms = read.csv(".\responses.csv")
+top_pms = read.csv("responses.csv")
 
 cols = top_pms %>% select(party, color) %>% unique()
 cols = setNames(cols$color, cols$party)
