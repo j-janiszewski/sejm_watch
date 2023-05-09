@@ -8,3 +8,5 @@ dates.txt
 __pycache__/
 
 wallet/
+
+.Rhistory
