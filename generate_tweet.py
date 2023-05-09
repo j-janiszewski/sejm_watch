@@ -3,7 +3,7 @@ import pandas as pd
 import subprocess
 import sys
 import datetime
-
+import os
 def get_date_range()-> tuple[str]:
     """Returns beginning (Monday) and end (Sunday) of a week two weeks ago 
 
@@ -43,5 +43,7 @@ with open("dates.txt","w") as f:
             f.writelines([starting_date, "\n",ending_date, "\n"])
 df.to_csv(f"{plot_type}.csv", index=False)
 
+print(os.listdir())
+print(os.getcwd())
 # running R script that will create plot and post status with it
-ret = subprocess.call(["Rscript",f".\\r_ggplot_scripts\{plot_type}.R"])
+ret = subprocess.call(["Rscript",f"r_ggplot_scripts\{plot_type}.R"])
