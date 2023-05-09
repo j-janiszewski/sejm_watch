@@ -4,13 +4,13 @@ library(magrittr)
 library(ggthemes)
 library(rtweet)
 
-# token <- create_token(
-#   app = Sys.getenv("TWITTER_APP_NAME"),
-#   consumer_key = Sys.getenv("TWITER_CONSUMER_KEY"),
-#   access_token = Sys.getenv("TWITER_ACCESS_TOKEN"),
-#   consumer_secret = Sys.getenv("TWITER_CONSUMER_SECRET"),
-#   access_secret = Sys.getenv("TWITER_ACCESS_SECRET")
-# )
+token <- create_token(
+  app = Sys.getenv("TWITTER_APP_NAME"),
+  consumer_key = Sys.getenv("TWITER_CONSUMER_KEY"),
+  access_token = Sys.getenv("TWITER_ACCESS_TOKEN"),
+  consumer_secret = Sys.getenv("TWITER_CONSUMER_SECRET"),
+  access_secret = Sys.getenv("TWITER_ACCESS_SECRET")
+)
 
 dates=readLines("dates.txt")
 
@@ -49,13 +49,11 @@ top_pms %>%
 
 temp_file <- tempfile()
 
-#ggsave(temp_file, device = "png", width = 12, height = 12)
-
-ggsave("plot.png", device = "png", width = 12, height = 12 )
+ggsave(temp_file, device = "png", width = 12, height = 12)
 
 status0 <- glue::glue("Najczęściej odpowiadający posłowie od {dates[1]} do {dates[2]} \
                       @{paste(top_pms$screen_name, collapse = ' @')}")
 
 print(status0)
 
-#post_tweet(status = status0, media = temp_file, token = token)
+post_tweet(status = status0, media = temp_file, token = token)

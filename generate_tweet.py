@@ -3,7 +3,7 @@ import pandas as pd
 import subprocess
 import sys
 import datetime
-import os
+
 def get_date_range()-> tuple[str]:
     """Returns beginning (Monday) and end (Sunday) of a week two weeks ago 
 
@@ -20,21 +20,17 @@ def get_date_range()-> tuple[str]:
     return start, end
 
 
-if  len(sys.argv) >1 :
-    plot_type = sys.argv[1]
-else:
-    plot_type= "responses"
 
-engine = db_session()
-
+plot_type = sys.argv[1]
+# read matching sql query and place date ranges inside 
 with open(f"sql_queries/{plot_type}.sql","r") as f:
     query = f.read()
-
 starting_date, ending_date = get_date_range()
 query=query.replace("STARTING_DATE",f"'{starting_date}'")
 query=query.replace("ENDING_DATE", f"'{ending_date}'")
 
 # getting data from db
+engine = db_session()
 with engine.connect() as conn:
     df =pd.read_sql(query, con=conn)
 
