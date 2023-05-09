@@ -47,7 +47,7 @@ top_pms %>%
    scale_color_manual(values = cols) +
   scale_fill_manual(values = cols)
 
-temp_file <- tempfile()
+temp_file <- tempfile(fileext = ".png")
 
 ggsave(temp_file, device = "png", width = 12, height = 12)
 
