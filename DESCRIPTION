@@ -5,6 +5,8 @@ Authors@R:
     person("Jan", "Janiszewski", , "jasiekj1@gmail.com")
 Encoding: UTF-8
 Imports: 
-    tidyverse,
+    ggplot2,
     rtweet,
-    ggthemes
+    ggthemes,
+    magrittr,
+    dplyr
