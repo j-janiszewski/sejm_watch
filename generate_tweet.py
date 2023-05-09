@@ -44,4 +44,4 @@ with open("dates.txt","w") as f:
 df.to_csv(f"{plot_type}.csv", index=False)
 
 # running R script that will create plot and post status with it
-ret = subprocess.call(["Rscript",f"r_ggplot_scripts\{plot_type}.R"], shell=True)
+ret = subprocess.call(["Rscript",f"r_ggplot_scripts\{plot_type}.R"])
