@@ -14,10 +14,11 @@ token <- create_token(
 
 dates=readLines("dates.txt")
 
-top_pms = read.csv("responses.csv")
+top_pms = read.csv("original_tweets.csv")
 
 cols = top_pms %>% select(party, color) %>% unique()
 cols = setNames(cols$color, cols$party)
+
 
 top_pms %>%
   mutate(name = reorder(name, n)) %>%
@@ -29,12 +30,15 @@ top_pms %>%
   geom_label(aes(
     label = n,
     color = party,
-    x = n - 7
+    x = n - 2
   )) +
   labs(
     fill = "Klub parlamentarny",
-    title = "Najczęściej odpowiadający posłowie",
-    subtitle = sprintf("Od %s do %s", dates[1], dates[2]),
+    title = "Posłowie z największą liczbą oryginalnych wpisów",
+    subtitle = sprintf(
+      "Liczba twittów bez cytowań, retweetów i odpowiedzi od %s do %s ",
+       dates[1], dates[2]
+    ),
     x = "Liczba odpowiedzi",
     y = "", caption = "Więcej na @sejm__watch"
   ) +
@@ -43,17 +47,17 @@ top_pms %>%
     panel.grid.major.y = element_blank(),
     axis.text.y = element_text( color = "black", size = 12, hjust = 1)
   ) +
-  guides(color = "none") +
+  guides(color = F) +
   scale_color_manual(values = cols) +
   scale_fill_manual(values = cols)
 
+
 temp_file <- tempfile(fileext = ".png")
 
-ggsave(temp_file, device = "png", width = 12, height = 12)
+ggsave("plot.png", device = "png", width = 12, height = 12)
 
-status0 <- glue::glue("Najczęściej odpowiadający posłowie od {dates[1]} do {dates[2]} \
+status0 <- glue::glue("Posłowie z największą liczbą oryginalnych wpisów od {dates[1]} do {dates[2]} \
                       @{paste(top_pms$screen_name, collapse = ' @')}")
-
 print(status0)
 
-post_tweet(status = status0, media = temp_file, media_alt_text= "Wykres najczęściej odpowiadających na twitterze posłów. ", token = token)
+post_tweet(status = status0, media = temp_file, media_alt_text= "Wykres najczęściej piszących oryginalne tweety posłów ", token = token)
