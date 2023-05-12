@@ -54,7 +54,7 @@ top_pms %>%
 
 temp_file <- tempfile(fileext = ".png")
 
-ggsave("plot.png", device = "png", width = 12, height = 12)
+ggsave(temp_file, device = "png", width = 12, height = 12)
 
 status0 <- glue::glue("Posłowie z największą liczbą oryginalnych wpisów od {dates[1]} do {dates[2]} \
                       @{paste(top_pms$screen_name, collapse = ' @')}")
