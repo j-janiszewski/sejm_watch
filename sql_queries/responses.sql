@@ -11,7 +11,7 @@ FROM POLITICIANS
 WHERE MEMBERS.is_active = 1
     AND TWITTER_ACCOUNTS.is_active = 1
     AND TWEETS.created_at >= TO_DATE(STARTING_DATE, 'dd-MM-yyyy')
-    AND TWEETS.created_at <= TO_DATE(ENDING_DATE, 'dd-MM-yyyy')
+    AND TWEETS.created_at <= (TO_DATE(ENDING_DATE, 'dd-MM-yyyy')+  .99999)
     AND TWEETS.reply_to_status_id IS NOT NULL
 GROUP BY first_name,
     second_name,

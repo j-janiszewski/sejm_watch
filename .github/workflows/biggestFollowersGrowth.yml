@@ -1,0 +1,36 @@
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "5 10 * * 2"
+
+name: create biggest followers growth status
+
+jobs:
+  post-stats:
+    # Use Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: r-lib/actions/setup-r@v2
+      - uses: r-lib/actions/setup-r-dependencies@v2
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: create twitter status
+        run: python generate_tweet.py followers_growth
+        env:
+          WIEJSKA_ONLINE_CS: ${{ secrets.WIEJSKA_ONLINE_CS }}
+          WIEJSKA_ONLINE_PASSWORD: ${{ secrets.WIEJSKA_ONLINE_PASSWORD }}
+          WIEJSKA_ONLINE_USER_NAME: ${{ secrets.WIEJSKA_ONLINE_USER_NAME }}
+          WIEJSKA_ONLINE_WALLET_ENCRYPTION_KEY: ${{ secrets.WIEJSKA_ONLINE_WALLET_ENCRYPTION_KEY }}
+          WIEJSKA_ONLINE_WALLET_PASSWORD: ${{ secrets.WIEJSKA_ONLINE_WALLET_PASSWORD }}
+          TWITTER_APP_NAME: ${{secrets.TWITTER_APP_NAME}}
+          TWITER_CONSUMER_KEY: ${{secrets.TWITER_CONSUMER_KEY}}
+          TWITER_ACCESS_TOKEN: ${{secrets.TWITER_ACCESS_TOKEN}}
+          TWITER_CONSUMER_SECRET: ${{secrets.TWITER_CONSUMER_SECRET}}
+          TWITER_ACCESS_SECRET: ${{secrets.TWITER_ACCESS_SECRET}}

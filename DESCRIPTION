@@ -9,4 +9,9 @@ Imports:
     rtweet,
     ggthemes,
     magrittr,
-    dplyr
+    dplyr,
+    gganimate,
+    gifski,
+    purrr,
+    tidyr,
+    here
