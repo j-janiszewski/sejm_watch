@@ -22,7 +22,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: create twitter status
-        run: python generate_tweet.py original_tweets
+        run: python generate_tweet.py most_active
         env:
           WIEJSKA_ONLINE_CS: ${{ secrets.WIEJSKA_ONLINE_CS }}
           WIEJSKA_ONLINE_PASSWORD: ${{ secrets.WIEJSKA_ONLINE_PASSWORD }}

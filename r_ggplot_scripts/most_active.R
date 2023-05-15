@@ -15,7 +15,7 @@ token <- create_token(
   consumer_secret = Sys.getenv("TWITER_CONSUMER_SECRET"),
   access_secret = Sys.getenv("TWITER_ACCESS_SECRET")
 )
-
+post_destroy("1658089804209303553", token = token)
 dates <- readLines("dates.txt")
 
 activity_by_day <- read.csv("most_active.csv")
